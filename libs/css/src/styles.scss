@@ -1,0 +1,3 @@
+@use 'communication/label/label' as label;
+
+@include label.classes();

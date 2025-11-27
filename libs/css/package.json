@@ -1,0 +1,19 @@
+{
+  "name": "@design-system/css",
+  "version": "1.0.136",
+  "description": "Design System CSS Library",
+  "license": "UNLICENSED",
+  "files": [
+    "styles.css",
+    "styles.css.map",
+    "tokens.css",
+    "tokens.css.map"
+  ],
+  "main": "styles.css",
+  "scripts": {},
+  "publishConfig": {
+    "access": "restricted",
+    "directory": "../../dist/libs/css"
+  },
+  "sideEffects": false
+}

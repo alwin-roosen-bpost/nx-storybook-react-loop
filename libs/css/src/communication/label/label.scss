@@ -1,0 +1,32 @@
+@use 'sass:map';
+
+@mixin classes() {
+  .label {
+    // Base layout and styles
+    display: inline-flex;
+    min-height: var(--spacing-6, 48px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xs);
+    flex-shrink: 0;
+    border-radius: var(--border-radius-2xs);
+    font-family: var(--font-family-base, 'Ubuntu, sans-serif');
+    font-size: var(--text-lg, 18px);
+    font-style: normal;
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--line-height-body, 150%);
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+
+    // Disabled label
+    &--disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

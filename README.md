@@ -13,4 +13,4 @@ We’ve identified a React effect loop issue occurring in Storybook 9 when used 
   - Open Storybook in your browser.
   - Inspect the label element in the rendered story.
   - Observe that the div#storybook-root is continuously re-rendered, indicating an effect loop.
-- (image.png)
+- ![Issue](image.png)

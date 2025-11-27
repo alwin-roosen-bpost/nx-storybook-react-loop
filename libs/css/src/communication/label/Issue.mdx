@@ -1,0 +1,18 @@
+import issueImage from '../../../../../image.png';
+
+# React effect loop Issue
+
+We’ve identified a React effect loop issue occurring in Storybook 9 when used with Nx. This results in continuous re-rendering of the div#storybook-root element.
+
+## Steps to reproduce the issue
+
+- Clone the repository
+- Install dependencies
+  - `npm install`
+- Start Storybook
+  - `npm run storybook`
+- Inspect the DOM
+  - Open Storybook in your browser.
+  - Inspect the label element in the rendered story.
+  - Observe that the div#storybook-root is continuously re-rendered, indicating an effect loop.
+- <img src={issueImage} alt="Issue Screenshot" />

@@ -1,0 +1,75 @@
+{
+  "name": "css",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/css/src",
+  "prefix": "bp",
+  "tags": [],
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4401,
+        "configDir": "libs/css/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/css",
+        "configDir": "libs/css/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        },
+        "prod": {
+          "quiet": true
+        }
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["node scripts/build-css.js"]
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "aws s3 sync dist/storybook/css/ s3://${S3_BUCKET_NAME}/css/ --delete"
+      },
+      "dependsOn": [
+        {
+          "target": "build-storybook",
+          "projects": "self"
+        }
+      ]
+    },
+    "chromatic": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["CHROMATIC=true nx run css:build-storybook", "npx chromatic --storybook-build-dir=dist/storybook/css --project-token=chpt_76a62fe75db8e90"],
+        "cwd": "{workspaceRoot}",
+        "parallel": false
+      }
+    },
+    "chromatic-ci": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "CHROMATIC=true nx run css:build-storybook",
+          "npx chromatic --storybook-build-dir=dist/storybook/css --exit-zero-on-changes --project-token=${CHROMATIC_PROJECT_TOKEN_CSS_STORYBOOK}"
+        ],
+        "cwd": "{workspaceRoot}",
+        "parallel": false
+      }
+    }
+  }
+}
